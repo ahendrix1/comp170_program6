@@ -9,8 +9,27 @@
     Author: C. Fulton
  */
 public class DogManagement {
-    public static void main(String[] args) throws Exception {
-        
-        //DECLARATIONS
+    public static class Dog {
+        // In order of csv appearance
+        private int id = 0;
+        private String name = "null";
+        private double weight = 0.0;
+        private int age = 0;
+        private String breed = "null";
+
+        public Dog(int i, String n, double w, int a, String b) {
+            this.id = i;
+            this.name = n;
+            this.weight = w;
+            this.age = a;
+            this.breed = b;
+
+        }
+
     }
+
+    public static void main(String[] args) throws Exception {
+        Dog doggy = new Dog(12, "Doggy", 10.2, 10, "Maltese");
+    }
+
 }
