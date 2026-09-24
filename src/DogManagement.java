@@ -29,22 +29,14 @@ import java.io.File;
 
 public class DogManagement {
     public static class Dog {
-        // In order of csv appearance
-        private int id;
-        private String name;
-        private double weight;
-        private int age;
-        private String breed;
+        // in order of csv appearance
+        private int id = 0;
+        private String name = "null";
+        private double weight = 0.0;
+        private int age = 0;
+        private String breed = "null";
 
-        public Dog(int i, String n, double w, int a, String b) {
-            this.id = i;
-            this.name = n;
-            this.weight = w;
-            this.age = a;
-            this.breed = b;
-
-        }
-
+        // default dog
         public Dog() {
             this.id = 0;
             this.name = "null";
@@ -54,6 +46,18 @@ public class DogManagement {
 
         }
 
+        // string array -> dog
+        public Dog(String[] dogBuffer) {
+
+            this.id = Integer.parseInt(dogBuffer[0]);
+            this.name = dogBuffer[1];
+            this.weight = Double.parseDouble(dogBuffer[2]);
+            this.age = Integer.parseInt(dogBuffer[3]);
+            this.breed = dogBuffer[4];
+
+        }
+
+        // dog -> dog
         public Dog Clone() {
             Dog clone = new Dog();
 
@@ -64,6 +68,22 @@ public class DogManagement {
             clone.breed = this.breed;
             return clone;
         }
+
+        // dog -> string array
+
+        public String[] toString(Dog dog) {
+            String[] stringArray = new String[5];
+
+            stringArray[0] = Integer.toString(dog.id);
+            stringArray[1] = dog.name;
+            stringArray[2] = Double.toString(dog.weight);
+            stringArray[3] = Integer.toString(dog.age);
+            stringArray[4] = dog.breed;
+
+            return stringArray;
+
+        }
+
     }
 
     public static void main(String[] args) throws Exception {
@@ -80,12 +100,8 @@ public class DogManagement {
             // splits the line into a buffer array
             dogBuffer = csvReader.nextLine().split(",");
 
-            // temp. variables with typed vals
-            int i = Integer.parseInt(dogBuffer[0]);
-            double w = Double.parseDouble(dogBuffer[2]);
-            int a = Integer.parseInt(dogBuffer[3]);
+            Dog newDog = new Dog(dogBuffer);
 
-            Dog newDog = new Dog(i, dogBuffer[1], w, a, "Not Specified");
             dogList.add(newDog.Clone());
 
         }
