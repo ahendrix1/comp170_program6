@@ -64,15 +64,17 @@ public class DogManagement {
             clone.breed = this.breed;
             return clone;
         }
-
     }
 
     public static void main(String[] args) throws Exception {
-        // Dog doggy = new Dog(12, "Doggy", 10.2, 10, "Maltese");
+        // csv read, appends to dog list with hard copies of
+        // a temporary newDog. closes reader after parsing.
         ArrayList<Dog> dogList = new ArrayList<Dog>(12);
         String[] dogBuffer = new String[5];
         Scanner csvReader = new Scanner(new File("./src/doginfo.csv"));
-        String[] header = csvReader.nextLine().split(",");
+
+        // eats first line into the header, to be printed later
+        final String[] header = csvReader.nextLine().split(",");
 
         while (csvReader.hasNextLine()) {
             // splits the line into a buffer array
