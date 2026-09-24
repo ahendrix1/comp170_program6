@@ -30,11 +30,11 @@ import java.io.File;
 public class DogManagement {
     public static class Dog {
         // In order of csv appearance
-        private int id = 0;
-        private String name = "null";
-        private double weight = 0.0;
-        private int age = 0;
-        private String breed = "null";
+        private int id;
+        private String name;
+        private double weight;
+        private int age;
+        private String breed;
 
         public Dog(int i, String n, double w, int a, String b) {
             this.id = i;
@@ -45,13 +45,48 @@ public class DogManagement {
 
         }
 
+        public Dog() {
+            this.id = 0;
+            this.name = "null";
+            this.weight = 0.0;
+            this.age = 0;
+            this.breed = "null";
+
+        }
+
+        public Dog Clone() {
+            Dog clone = new Dog();
+
+            clone.id = this.id;
+            clone.name = this.name;
+            clone.weight = this.weight;
+            clone.age = this.age;
+            clone.breed = this.breed;
+            return clone;
+        }
+
     }
 
     public static void main(String[] args) throws Exception {
-        Dog doggy = new Dog(12, "Doggy", 10.2, 10, "Maltese");
+        // Dog doggy = new Dog(12, "Doggy", 10.2, 10, "Maltese");
         ArrayList<Dog> dogList = new ArrayList<Dog>(12);
+        String[] dogBuffer = new String[5];
+        Scanner csvReader = new Scanner(new File("./src/doginfo.csv"));
+        String[] header = csvReader.nextLine().split(",");
 
-        Scanner csvReader = new Scanner(new File("./doginfo.csv"));
+        while (csvReader.hasNextLine()) {
+            // splits the line into a buffer array
+            dogBuffer = csvReader.nextLine().split(",");
+
+            // temp. variables with typed vals
+            int i = Integer.parseInt(dogBuffer[0]);
+            double w = Double.parseDouble(dogBuffer[2]);
+            int a = Integer.parseInt(dogBuffer[3]);
+
+            Dog newDog = new Dog(i, dogBuffer[1], w, a, "Not Specified");
+            dogList.add(newDog.Clone());
+
+        }
 
         csvReader.close();
     }
