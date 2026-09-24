@@ -3,11 +3,30 @@
 **Programs 6 is similar in functionality to program 5**
 
 
-    [REPLACE MY INFORMATION WITH YOURS]
-    Course: COMP 170, Spring I 2023
-    System: Visual Studio Code, Windows 10
-    Author: C. Fulton
+    Course: COMP 170, Fall 1 2026
+    System: GNU/Linux
+    Author: Avery Hendrix
  */
+
+/* TODO 
+ * - class Dog()
+ *      - constuctor
+ *      - getDog(id) 
+ *      - editDog(dog, attrib, new)
+ *      - toString(dog)
+ * - main
+ *      - make dog array
+ *      - import dogcsv
+ *      - start while loop
+    *      - check create update retrieve
+    *      - idk. do those
+ * - errors on if illegal dog, newdog is over 12
+*   
+ */
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+
 public class DogManagement {
     public static class Dog {
         // In order of csv appearance
@@ -30,6 +49,11 @@ public class DogManagement {
 
     public static void main(String[] args) throws Exception {
         Dog doggy = new Dog(12, "Doggy", 10.2, 10, "Maltese");
+        ArrayList<Dog> dogList = new ArrayList<Dog>(12);
+
+        Scanner csvReader = new Scanner(new File("./doginfo.csv"));
+
+        csvReader.close();
     }
 
 }
