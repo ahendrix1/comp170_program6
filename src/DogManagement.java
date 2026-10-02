@@ -8,21 +8,6 @@
     Author: Avery Hendrix
  */
 
-/* TODO 
- * x class Dog()
- *      x constuctor
- *      - getDog(id) 
- *      - editDog(dog, attrib, new)
- *      x toString(dog)
- * - main
- *      x make dog array
- *      x import dogcsv
- *      - start while loop
-    *      - check create update retrieve
-    *      - idk. do those
- * - errors on if illegal dog, newdog is over 12
-*   
- */
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
