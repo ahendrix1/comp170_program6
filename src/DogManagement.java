@@ -27,7 +27,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 
-public static class Dog {
+public class Dog {
     // in order of csv appearance
     private int id = 0;
     private String name = "null";
@@ -66,14 +66,14 @@ public static class Dog {
 
     // dog -> string array. nvm!
 
-    public String[] getDog(Dog dog) {
+    public String[] getDog() {
         String[] stringArray = new String[5];
 
-        stringArray[0] = Integer.toString(dog.id);
-        stringArray[1] = dog.name;
-        stringArray[2] = Double.toString(dog.weight);
-        stringArray[3] = Integer.toString(dog.age);
-        stringArray[4] = dog.breed;
+        stringArray[0] = Integer.toString(this.id);
+        stringArray[1] = this.name;
+        stringArray[2] = Double.toString(this.weight);
+        stringArray[3] = Integer.toString(this.age);
+        stringArray[4] = this.breed;
 
         return stringArray;
 
@@ -81,24 +81,24 @@ public static class Dog {
 
     // this cannot be right
 
-    public Dog setID(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public Dog setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Dog setWeight(Double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
 
     }
 
-    public Dog setAge(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    public Dog setBreed(String breed) {
+    public void setBreed(String breed) {
         this.breed = breed;
     }
 
@@ -162,19 +162,19 @@ public class DogManagement {
         Dog bufferDog = new Dog();
 
         System.out.print("ID: ");
-        bufferDog.id = scn.nextInt();
+        bufferDog.setID(scn.nextInt());
 
         System.out.print("Name: ");
-        bufferDog.name = scn.next();
+        bufferDog.setName(scn.next());
 
         System.out.print("Weight: ");
-        bufferDog.weight = scn.nextDouble();
+        bufferDog.setWeight(scn.nextDouble());
 
         System.out.print("Age: ");
-        bufferDog.age = scn.nextInt();
+        bufferDog.setAge(scn.nextInt());
 
         System.out.print("Breed: ");
-        bufferDog.breed = scn.next();
+        bufferDog.setBreed(scn.next());
 
         dogList.add(bufferDog.Clone());
 
@@ -183,7 +183,9 @@ public class DogManagement {
     // editDog
     // prints out single dog in pretty format
     public static void printDog(Dog dog) {
-        System.out.printf("|%-4d|%-12s|%-7.2f|%-4d|%-12s|%n", dog.id, dog.name, dog.weight, dog.age, dog.breed);
+        String[] dogArray = dog.getDog();
+        System.out.printf("|%-4s|%-12s|%-7s|%-4s|%-12s|%n", dogArray[0], dogArray[1], dogArray[2], dogArray[3],
+                dogArray[4]);
 
     }
 
