@@ -94,14 +94,14 @@ public class DogManagement {
     }
 
     // reads csv and returns the header line, editing the dogList
-    public static String[] readCSV() throws Exception {
+    public static void readCSV() throws Exception {
         String[] dogBuffer = new String[5];
         Scanner csvReader = new Scanner(new File("./src/doginfo.csv"));
         // csv read, appends to dog list with hard copies of
         // a temporary newDog. closes reader after parsing.
 
         // eats first line
-        String[] header = csvReader.nextLine().split(",");
+        csvReader.nextLine();
 
         while (csvReader.hasNextLine()) {
             // splits the line into a buffer array
@@ -113,7 +113,6 @@ public class DogManagement {
 
         }
         csvReader.close();
-        return header;
 
     }
 
@@ -141,18 +140,6 @@ public class DogManagement {
         menuOption = scn.nextInt();
 
         return menuOption;
-    }
-
-    public static void printList() {
-        System.out.println("_____________________________________________");
-        System.out.printf("|%-4s|%-12s|%-7s|%-4s|%-12s|%n", "ID", "Name", "Weight", "Age", "Breed");
-        System.out.println("|-------------------------------------------|");
-        for (Dog sDog : dogList) {
-            printDog(sDog);
-        }
-
-        System.out.println("---------------------------------------------");
-
     }
 
     // makes new dog interactively
@@ -190,13 +177,25 @@ public class DogManagement {
 
     }
 
+    public static void printList() {
+        System.out.println("_____________________________________________");
+        System.out.printf("|%-4s|%-12s|%-7s|%-4s|%-12s|%n", "ID", "Name", "Weight", "Age", "Breed");
+        System.out.println("|-------------------------------------------|");
+        for (Dog sDog : dogList) {
+            printDog(sDog);
+        }
+
+        System.out.println("---------------------------------------------");
+
+    }
+
     public static void main(String[] args) throws Exception {
         int selectAct;
         int selectDog;
 
         Boolean session = true;
 
-        String[] header = readCSV();
+        readCSV();
 
         // also reused, but edited
         welcome();
