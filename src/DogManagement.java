@@ -27,71 +27,70 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 
+public static class Dog {
+    // in order of csv appearance
+    private int id;
+    private String name;
+    private double weight;
+    private int age;
+    private String breed = "null";
+
+    // default dog
+    public Dog() {
+        this.id = 0;
+        this.name = "null";
+        this.weight = 0.0;
+        this.age = 0;
+        this.breed = "null";
+
+    }
+
+    // string array -> dog
+    public Dog(String[] dogBuffer) {
+
+        this.id = Integer.parseInt(dogBuffer[0]);
+        this.name = dogBuffer[1];
+        this.weight = Double.parseDouble(dogBuffer[2]);
+        this.age = Integer.parseInt(dogBuffer[3]);
+        if (dogBuffer.length > 4) {
+            this.breed = dogBuffer[4];
+        } // hacky fix for the csv not having this
+
+    }
+
+    // dog -> dog
+    public Dog Clone() {
+        Dog clone = new Dog();
+
+        clone.id = this.id;
+        clone.name = this.name;
+        clone.weight = this.weight;
+        clone.age = this.age;
+        clone.breed = this.breed;
+        return clone;
+    }
+
+    // dog -> string array
+
+    public String[] toString(Dog dog) {
+        String[] stringArray = new String[5];
+
+        stringArray[0] = Integer.toString(dog.id);
+        stringArray[1] = dog.name;
+        stringArray[2] = Double.toString(dog.weight);
+        stringArray[3] = Integer.toString(dog.age);
+        stringArray[4] = dog.breed;
+
+        return stringArray;
+
+    }
+}
+
 public class DogManagement {
     // general scanner
     static Scanner scn = new Scanner(System.in);
-    static ArrayList<Dog> dogList = new ArrayList<Dog>(12);
     // array list of dog objects
-
-    public static class Dog {
-        // in order of csv appearance
-        private int id;
-        private String name;
-        private double weight;
-        private int age;
-        private String breed = "null";
-
-        // default dog
-        public Dog() {
-            this.id = 0;
-            this.name = "null";
-            this.weight = 0.0;
-            this.age = 0;
-            this.breed = "null";
-
-        }
-
-        // string array -> dog
-        public Dog(String[] dogBuffer) {
-
-            this.id = Integer.parseInt(dogBuffer[0]);
-            this.name = dogBuffer[1];
-            this.weight = Double.parseDouble(dogBuffer[2]);
-            this.age = Integer.parseInt(dogBuffer[3]);
-            if (dogBuffer.length > 4) {
-                this.breed = dogBuffer[4];
-            } // hacky fix for the csv not having this
-
-        }
-
-        // dog -> dog
-        public Dog Clone() {
-            Dog clone = new Dog();
-
-            clone.id = this.id;
-            clone.name = this.name;
-            clone.weight = this.weight;
-            clone.age = this.age;
-            clone.breed = this.breed;
-            return clone;
-        }
-
-        // dog -> string array
-
-        public String[] toString(Dog dog) {
-            String[] stringArray = new String[5];
-
-            stringArray[0] = Integer.toString(dog.id);
-            stringArray[1] = dog.name;
-            stringArray[2] = Double.toString(dog.weight);
-            stringArray[3] = Integer.toString(dog.age);
-            stringArray[4] = dog.breed;
-
-            return stringArray;
-
-        }
-
-    }
+    static ArrayList<Dog> dogList = new ArrayList<Dog>(12);
 
     // reads csv and returns the header line, editing the dogList
     public static void readCSV() throws Exception {
