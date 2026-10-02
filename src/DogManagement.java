@@ -64,10 +64,9 @@ public static class Dog {
         return clone;
     }
 
-    // dog -> string array. idk. made it for no good reason. probably going to
-    // delete
+    // dog -> string array. nvm!
 
-    public String[] toString(Dog dog) {
+    public String[] getDog(Dog dog) {
         String[] stringArray = new String[5];
 
         stringArray[0] = Integer.toString(dog.id);
@@ -80,9 +79,29 @@ public static class Dog {
 
     }
 
-    // TODO: get and set attrib. take in dog, attrib name (+ new val).
+    // this cannot be right
 
-    // public void getAttrib(Dog dog, )
+    public Dog setID(int id) {
+        this.id = id;
+    }
+
+    public Dog setName(String name) {
+        this.name = name;
+    }
+
+    public Dog setWeight(Double weight) {
+        this.weight = weight;
+
+    }
+
+    public Dog setAge(int age) {
+        this.age = age;
+    }
+
+    public Dog setBreed(String breed) {
+        this.breed = breed;
+    }
+
 }
 
 public class DogManagement {
