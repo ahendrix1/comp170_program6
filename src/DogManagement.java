@@ -135,13 +135,24 @@ public class DogManagement {
         System.out.println("\t2) Display dog record");
         System.out.println("\t3) Update dog record");
         System.out.println("\t4) Exit Program");
-        System.out.println("\t5) Print human ages");
 
         System.out.print("Enter selection here --> ");
         // INPUT
         menuOption = scn.nextInt();
 
         return menuOption;
+    }
+
+    public static void printList() {
+        System.out.println("_____________________________________________");
+        System.out.printf("|%-4s|%-12s|%-7s|%-4s|%-12s|%n", "ID", "Name", "Weight", "Age", "Breed");
+        System.out.println("|-------------------------------------------|");
+        for (Dog sDog : dogList) {
+            printDog(sDog);
+        }
+
+        System.out.println("---------------------------------------------");
+
     }
 
     // makes new dog interactively
@@ -153,35 +164,31 @@ public class DogManagement {
 
         Dog bufferDog = new Dog();
 
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         bufferDog.id = scn.nextInt();
 
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         bufferDog.name = scn.next();
 
-        System.out.println("Weight: ");
+        System.out.print("Weight: ");
         bufferDog.weight = scn.nextDouble();
 
-        System.out.println("Age: ");
+        System.out.print("Age: ");
         bufferDog.age = scn.nextInt();
 
-        System.out.println("Breed: ");
+        System.out.print("Breed: ");
         bufferDog.breed = scn.next();
 
         dogList.add(bufferDog.Clone());
 
     }
 
-    /*
-     * public static int getDog() {
-     * int id;
-     * 
-     * return id;
-     * 
-     * }
-     * // editDog
-     * // printDog
-     */
+    // editDog
+    // prints out single dog in pretty format
+    public static void printDog(Dog dog) {
+        System.out.printf("|%-4d|%-12s|%-7.2f|%-4d|%-12s|%n", dog.id, dog.name, dog.weight, dog.age, dog.breed);
+
+    }
 
     public static void main(String[] args) throws Exception {
         int selectAct;
@@ -196,12 +203,13 @@ public class DogManagement {
 
         while (session) {
 
+            printList();
+
             selectAct = displayPrompt();
 
             switch (selectAct) {
                 case 1: // create
                     newDog();
-                    System.out.println(dogList.getLast().name);
                     break;
                 /*
                  * case 2: // print
@@ -220,10 +228,11 @@ public class DogManagement {
                  * System.out.println("Bad dog.");
                  * }
                  * break;
-                 * case 4:
-                 * session = false;
-                 * break;
                  */
+                case 4:
+                    session = false;
+                    break;
+
                 default:
                     System.out.println("Bad option.");
                     break;
