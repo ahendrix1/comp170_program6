@@ -29,23 +29,17 @@ import java.io.File;
 
 public static class Dog {
     // in order of csv appearance
-    private int id;
-    private String name;
-    private double weight;
-    private int age;
+    private int id = 0;
+    private String name = "null";
+    private double weight = 0.0;
+    private int age = 0;
     private String breed = "null";
 
-    // default dog
+    // default dog uses above values
     public Dog() {
-        this.id = 0;
-        this.name = "null";
-        this.weight = 0.0;
-        this.age = 0;
-        this.breed = "null";
-
     }
 
-    // string array -> dog
+    // string array -> dog. used for csv parsing
     public Dog(String[] dogBuffer) {
 
         this.id = Integer.parseInt(dogBuffer[0]);
@@ -58,7 +52,7 @@ public static class Dog {
 
     }
 
-    // dog -> dog
+    // dog -> dog. used to add buffers to list so they can be reused
     public Dog Clone() {
         Dog clone = new Dog();
 
@@ -70,7 +64,8 @@ public static class Dog {
         return clone;
     }
 
-    // dog -> string array
+    // dog -> string array. idk. made it for no good reason. probably going to
+    // delete
 
     public String[] toString(Dog dog) {
         String[] stringArray = new String[5];
@@ -84,20 +79,20 @@ public static class Dog {
         return stringArray;
 
     }
+
+    // TODO: get and set attrib. take in dog, attrib name (+ new val).
+
+    // public void getAttrib(Dog dog, )
 }
 
 public class DogManagement {
-    // general scanner
     static Scanner scn = new Scanner(System.in);
-    // array list of dog objects
     static ArrayList<Dog> dogList = new ArrayList<Dog>(12);
 
-    // reads csv and returns the header line, editing the dogList
+    // reads csv, adding each line to the dogList
     public static void readCSV() throws Exception {
         String[] dogBuffer = new String[5];
         Scanner csvReader = new Scanner(new File("./src/doginfo.csv"));
-        // csv read, appends to dog list with hard copies of
-        // a temporary newDog. closes reader after parsing.
 
         // eats first line
         csvReader.nextLine();
@@ -105,10 +100,10 @@ public class DogManagement {
         while (csvReader.hasNextLine()) {
             // splits the line into a buffer array
             dogBuffer = csvReader.nextLine().split(",");
-
             Dog bufferDog = new Dog(dogBuffer);
 
             dogList.add(bufferDog.Clone());
+            // so the bufferDog can be freed
 
         }
         csvReader.close();
@@ -116,14 +111,11 @@ public class DogManagement {
     }
 
     // copied wholesale from provided code in program 5
-
-    // Welcome method that outputs introductory text explaining program
     public static void welcome() {
         System.out.println(
                 "Welcome, this program allows for a care attendant to be able to create, retrieve and update a dog record from the system.");
     }
 
-    // Method to display prompt and return integer values
     public static int displayPrompt() {
         // Local Variables
         int menuOption;
