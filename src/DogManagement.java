@@ -30,10 +30,10 @@ import java.io.File;
 public class DogManagement {
     public static class Dog {
         // in order of csv appearance
-        private int id = 0;
-        private String name = "null";
-        private double weight = 0.0;
-        private int age = 0;
+        private int id;
+        private String name;
+        private double weight;
+        private int age;
         private String breed = "null";
 
         // default dog
@@ -53,7 +53,9 @@ public class DogManagement {
             this.name = dogBuffer[1];
             this.weight = Double.parseDouble(dogBuffer[2]);
             this.age = Integer.parseInt(dogBuffer[3]);
-            this.breed = dogBuffer[4];
+            if (dogBuffer.length > 4) {
+                this.breed = dogBuffer[4];
+            } // hacky fix for the csv not having this
 
         }
 
@@ -86,15 +88,14 @@ public class DogManagement {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        // csv read, appends to dog list with hard copies of
-        // a temporary newDog. closes reader after parsing.
-        ArrayList<Dog> dogList = new ArrayList<Dog>(12);
+    public static ArrayList<Dog> readCSV(ArrayList<Dog> dogList) throws Exception {
         String[] dogBuffer = new String[5];
         Scanner csvReader = new Scanner(new File("./src/doginfo.csv"));
+        // csv read, appends to dog list with hard copies of
+        // a temporary newDog. closes reader after parsing.
 
-        // eats first line into the header, to be printed later
-        final String[] header = csvReader.nextLine().split(",");
+        // eats first line
+        csvReader.nextLine();
 
         while (csvReader.hasNextLine()) {
             // splits the line into a buffer array
@@ -105,8 +106,16 @@ public class DogManagement {
             dogList.add(newDog.Clone());
 
         }
-
         csvReader.close();
+        return dogList;
+
+    }
+
+    public static void main(String[] args) throws Exception {
+        ArrayList<Dog> dogList = new ArrayList<Dog>(12);
+
+        dogList = readCSV(dogList);
+
     }
 
 }
